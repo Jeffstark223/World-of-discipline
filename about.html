@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Us — World of Discipline (WOD)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ===== ALL CSS FROM YOUR ORIGINAL FILE (unchanged) ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:        #2d7d7d;
+    --teal-dark:   #1f5f5f;
+    --teal-pale:   #eef6f6;
+    --dark:        #111111;
+    --bg:          #f7f7f7;
+    --bg2:         #f2f2f2;
+    --bg3:         #ebebeb;
+    --panel:       #ffffff;
+    --border:      rgba(0,0,0,.1);
+    --border-soft: rgba(0,0,0,.06);
+    --text:        #111111;
+    --muted:       #555555;
+    --muted2:      #888888;
+    --white:       #ffffff;
+    --ff-display: 'Playfair Display', Georgia, serif;
+    --ff-body:    'Lato', sans-serif;
+    --ease:       cubic-bezier(.22,.68,0,1.2);
+    --ease-std:   cubic-bezier(.4,0,.2,1);
+    --ease-out:   cubic-bezier(0,0,.2,1);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { background: var(--bg); color: #111111; font-family: var(--ff-body); font-weight: 400; line-height: 1.7; overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a   { text-decoration: none; color: inherit; }
+
+  .container { width: min(1160px, 92vw); margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--ff-body);
+    font-size: .68rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #111111;
+    margin-bottom: .9rem;
+    font-weight: 700;
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #111111;
+  }
+  .section-title em { font-style: italic; color: #111111; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .85rem 2.2rem;
+    border-radius: 50px;
+    font-family: var(--ff-body);
+    font-size: .82rem; font-weight: 700; letter-spacing: .08em;
+    cursor: pointer;
+    transition: all .3s var(--ease-std);
+    border: none;
+  }
+  .btn-gold { background: var(--teal); color: #ffffff; }
+  .btn-gold:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,125,125,.3); }
+  .btn-outline { background: transparent; color: #111111; border: 1.5px solid rgba(0,0,0,.3); border-radius: 50px; }
+  .btn-outline:hover { border-color: #111111; color: #111111; transform: translateY(-2px); }
+
+  /* Scroll Reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .85s var(--ease-std), transform .85s var(--ease-std); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left  { opacity:0; transform:translateX(-40px); transition: opacity .85s var(--ease-std),transform .85s var(--ease-std); }
+  .reveal-right { opacity:0; transform:translateX(40px);  transition: opacity .85s var(--ease-std),transform .85s var(--ease-std); }
+  .reveal-left.visible, .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+  /* ══════════════════ NAVBAR ══════════════════ */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; justify-content: center; padding: 1.2rem 0;
+    transition: padding .45s var(--ease-out);
+  }
+  #navbar.scrolled { padding: .75rem 0; }
+
+  .nav-pill {
+    display: flex; align-items: center; justify-content: space-between;
+    width: min(1100px, 92vw); padding: .75rem 1.1rem .75rem 1.3rem;
+    border-radius: 60px; background: transparent; border: 1px solid transparent;
+    transition: background .5s var(--ease-out), border-color .5s var(--ease-out),
+      box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .4s var(--ease-out);
+    position: relative;
+  }
+  #navbar.scrolled .nav-pill {
+    background: rgba(255,255,255,.97); border-color: rgba(0,0,0,.08);
+    box-shadow: 0 4px 30px rgba(0,0,0,.08), 0 1px 0 rgba(255,255,255,.9) inset;
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    width: min(980px, 88vw); padding: .6rem .9rem .6rem 1.1rem;
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+  .nav-logo img {
+    height: 40px; width: 40px; object-fit: contain; border-radius: 50%;
+    border: 1.5px solid var(--border); transition: transform .4s var(--ease);
+    background: rgba(250,248,245,.9);
+  }
+  .nav-logo:hover img { transform: rotate(5deg) scale(1.05); }
+  .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .nav-logo-text span:first-child { font-family: var(--ff-display); font-size: 1rem; font-weight: 700; color: var(--white); transition: color .3s; }
+  #navbar.scrolled .nav-logo-text span:first-child { color: #111111; }
+  .nav-logo-text span:last-child { font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-top: .12rem; font-weight: 700; }
+  #navbar.scrolled .nav-logo-text span:last-child { color: #555555; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: .15rem; list-style: none;
+    position: absolute; left: 50%; transform: translateX(-50%);
+  }
+  .nav-links a {
+    font-size: .73rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.85); padding: .5rem 1rem; border-radius: 30px;
+    transition: color .3s, background .3s; white-space: nowrap;
+  }
+  #navbar.scrolled .nav-links a { color: #444444; }
+  .nav-links a:hover { background: rgba(0,0,0,.06); }
+  #navbar.scrolled .nav-links a:hover { color: #111111; }
+
+  .nav-cta { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+  .nav-cta .btn-gold { background: var(--teal); }
+  #navbar.scrolled .nav-cta .btn-gold { background: var(--teal); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; border-radius: 50%; transition: background .3s; }
+  .hamburger:hover { background: rgba(0,0,0,.06); }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all .35s var(--ease-std); transform-origin: center; }
+  #navbar.scrolled .hamburger span { background: #111111; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; flex-direction: column; gap: 0;
+    background: rgba(255,255,255,.98); backdrop-filter: blur(24px);
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity .4s;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; display: flex; }
+  .mobile-menu a { font-family: var(--ff-display); font-size: clamp(2rem, 6vw, 3rem); font-weight: 400; color: #111111; padding: .55rem 0; transition: color .3s; }
+  .mobile-menu a:hover { color: var(--teal); }
+  .mobile-menu-close {
+    position: absolute; top: 2rem; right: 2rem; font-size: 1.4rem; color: #888888; cursor: pointer;
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; border: 1px solid rgba(0,0,0,.1); transition: all .3s;
+  }
+  .mobile-menu-close:hover { color: #111111; border-color: #111111; }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav-cta .btn { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* About Specific Styles */
+  .about-hero {
+    padding: 11rem 0 6rem; background: var(--bg); text-align: center;
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-visual { position: relative; }
+  .about-img-main {
+    width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.12);
+  }
+  .about-img-accent {
+    position: absolute; bottom: -3rem; right: -3rem; width: 52%;
+    aspect-ratio: 1; object-fit: cover; border-radius: 8px;
+    border: 8px solid var(--bg); box-shadow: 0 15px 50px rgba(0,0,0,.15);
+  }
+  .about-stat-card {
+    position: absolute; top: 2rem; left: -2.5rem;
+    background: var(--teal); color: #ffffff;
+    padding: 1.6rem 2rem; border-radius: 8px; box-shadow: 0 15px 40px rgba(45,125,125,.3);
+  }
+  .about-stat-card strong {
+    display: block; font-family: var(--ff-display); font-size: 3rem;
+    font-weight: 400; line-height: 1;
+  }
+  .about-stat-card span {
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    opacity: .9; font-weight: 700;
+  }
+  .about-body {
+    color: #555555; font-size: 1.02rem; line-height: 1.9;
+  }
+  .mv-list {
+    list-style: none; margin: 3rem 0;
+  }
+  .mv-list li {
+    display: flex; gap: 1.4rem; align-items: flex-start;
+    padding: 1.4rem 0; border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  .mv-list li:first-child { border-top: 1px solid rgba(0,0,0,.08); }
+  .mv-icon {
+    flex-shrink: 0; width: 42px; height: 42px;
+    border: 1.5px solid rgba(0,0,0,.12); display: flex;
+    align-items: center; justify-content: center;
+    border-radius: 50%; color: var(--teal); font-size: 1.1rem;
+    background: var(--teal-pale);
+  }
+  .mv-text strong {
+    display: block; font-size: .82rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #111111; margin-bottom: .4rem;
+  }
+  .mv-text p { color: #555555; font-size: .95rem; line-height: 1.7; }
+
+  @media (max-width: 860px) {
+    .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .about-img-accent { display: none; }
+    .about-stat-card { left: 0; top: -1rem; }
+  }
+
+  /* Footer */
+  footer { background: #f2f2f2; padding: 4rem 0 2rem; border-top: 1px solid rgba(0,0,0,.08); }
+  .footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-logo { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+  .footer-logo img { height: 38px; width: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); }
+  .footer-logo-text { font-family: var(--ff-display); font-size: 1.05rem; color: #111111; }
+  .footer-tagline { color: #555555; font-size: .87rem; line-height: 1.7; max-width: 240px; }
+  .footer-socials { display: flex; gap: .8rem; margin-top: 1.4rem; }
+  .social-link {
+    width: 36px; height: 36px; border: 1px solid rgba(0,0,0,.12);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #555555; transition: all .3s;
+  }
+  .social-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+  .footer-col h4 {
+    font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+    color: #111111; margin-bottom: 1.2rem; font-weight: 700;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: .6rem; }
+  .footer-col ul li a { color: #555555; font-size: .87rem; transition: color .3s; }
+  .footer-col ul li a:hover { color: #111111; }
+  .footer-bottom {
+    border-top: 1px solid rgba(0,0,0,.08); padding-top: 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { color: #888888; font-size: .76rem; }
+
+  @media (max-width: 860px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+
+  .delay-1 { transition-delay: .1s; }
+  .delay-2 { transition-delay: .22s; }
+  .delay-3 { transition-delay: .36s; }
+  .delay-4 { transition-delay: .5s; }
+
+  /* ══════════════════ ABOUT HERO — dark bg so navbar starts white ══════════════════ */
+  .about-hero {
+    padding: 11rem 0 7rem;
+    background: linear-gradient(160deg, #0e2e2e 0%, #1a4a4a 60%, #0e2e2e 100%);
+    text-align: center;
+  }
+  .about-hero .section-label { color: rgba(255,255,255,.6); }
+  .about-hero .section-title { color: #ffffff; }
+  .about-hero .section-title em { color: rgba(255,255,255,.7); }
+  .about-hero p { color: rgba(255,255,255,.7); }
+
+  /* ══════════════════ MISSION & VISION DEDICATED SECTION ══════════════════ */
+  .mv-section {
+    padding: 7rem 0;
+    background: var(--bg);
+  }
+  .mv-section-head {
+    text-align: center; margin-bottom: 4.5rem;
+  }
+  .mv-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .mv-card {
+    background: var(--panel); border-radius: 10px;
+    border: 1px solid var(--border-soft);
+    padding: 3rem 2.4rem; text-align: center;
+    transition: all .4s var(--ease-std);
+  }
+  .mv-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,.1); }
+  .mv-card-icon {
+    width: 60px; height: 60px; background: var(--teal-pale);
+    border: 1.5px solid rgba(45,125,125,.2);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 1.6rem;
+  }
+  .mv-card h3 {
+    font-family: var(--ff-display); font-size: 1.4rem; font-weight: 500;
+    color: #111111; margin-bottom: 1rem;
+  }
+  .mv-card p { color: #555555; font-size: .95rem; line-height: 1.8; }
+  @media (max-width: 860px) { .mv-cards { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  /* ══════════════════ QUOTE STRIP ══════════════════ */
+  .quote-strip {
+    background: var(--teal); padding: 5rem 0; text-align: center;
+  }
+  .quote-strip blockquote {
+    font-family: var(--ff-display); font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 400; font-style: italic; color: #ffffff;
+    max-width: 780px; margin: 0 auto 1.2rem; line-height: 1.5;
+  }
+  .quote-strip cite {
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.65); font-style: normal; font-weight: 700;
+  }
+
+  /* ══════════════════ CORE VALUES STRIP ══════════════════ */
+  .values-strip {
+    background: var(--bg2); padding: 7rem 0;
+  }
+  .values-head { text-align: center; margin-bottom: 4rem; }
+  .values-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: rgba(0,0,0,.08); border-radius: 10px; overflow: hidden;
+  }
+  .value-item {
+    background: var(--panel); padding: 2.4rem 1.6rem; text-align: center;
+    transition: background .3s;
+  }
+  .value-item:hover { background: var(--teal-pale); }
+  .value-num {
+    font-family: var(--ff-display); font-size: 2.2rem; font-weight: 400;
+    color: var(--teal); opacity: .3; line-height: 1; margin-bottom: .8rem;
+  }
+  .value-name {
+    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 700; color: #111111; margin-bottom: .6rem;
+  }
+  .value-desc { font-size: .84rem; color: #555555; line-height: 1.65; }
+  @media (max-width: 860px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .values-grid { grid-template-columns: 1fr; } }
+
+  #btt svg { width: 15px; height: 15px; }
+</style>
+</head>
+<body>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <span class="mobile-menu-close" id="mobileClose" aria-label="Close">✕</span>
+  <a href="wod-church.html" onclick="closeMobile()">Home</a>
+  <a href="about.html"      onclick="closeMobile()">About</a>
+  <a href="sermons.html"    onclick="closeMobile()">Sermons</a>
+  <a href="events.html"     onclick="closeMobile()">Events</a>
+  <a href="ministries.html" onclick="closeMobile()">Ministries</a>
+  <a href="leadership.html" onclick="closeMobile()">Leadership</a>
+  <a href="contact.html"    onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-pill" id="navPill">
+    <a href="wod-church.html" class="nav-logo" aria-label="World of Discipline Home">
+      <img src="logo.jpg" alt="WOD Logo" />
+      <div class="nav-logo-text">
+        <span>World of Discipline</span>
+        <span>WOD Ministry</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="ministries.html">Ministries</a></li>
+      <li><a href="leadership.html">Leadership</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-gold">Join Us</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- About Hero -->
+<section class="about-hero">
+  <div class="container">
+    <p class="section-label reveal">Our Story</p>
+    <h1 class="section-title reveal delay-1">About <em>World of Discipline</em></h1>
+    <p class="reveal delay-2" style="max-width: 720px; margin: 1.8rem auto 0; font-size: 1.08rem;">
+      A Spirit-filled church committed to raising disciplined, devoted followers of Jesus Christ who live out the Word daily.
+    </p>
+  </div>
+</section>
+
+<!-- Main About Content -->
+<section style="padding: 6rem 0; background: var(--bg);">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Visual Side -->
+      <div class="about-visual reveal-left">
+        <div class="about-stat-card">
+          <strong>15+</strong>
+          <span>Years of Ministry</span>
+        </div>
+        <img class="about-img-main" 
+             src="https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&w=900&q=80" 
+             alt="Church gathering in worship" />
+        <img class="about-img-accent" 
+             src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80" 
+             alt="Community fellowship" />
+      </div>
+
+      <!-- Content Side -->
+      <div class="about-content reveal-right">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Built on the <em>Word</em>,<br>moved by the Spirit</h2>
+        
+        <p class="about-body" style="margin-top: 2rem;">
+          World of Discipline (WOD) is a vibrant, Spirit-filled church community in Accra, Ghana. 
+          We are passionate about biblical truth, disciplined Christian living, and authentic worship. 
+          Our desire is to see believers grow into mature disciples who impact their families, workplaces, 
+          and society for the glory of God.
+        </p>
+
+        <ul class="mv-list">
+          <li>
+            <div class="mv-icon">✦</div>
+            <div class="mv-text">
+              <strong>Our Mission</strong>
+              <p>To make fully devoted followers of Christ who are disciplined in prayer, grounded in Scripture, and active in service.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mv-icon">◎</div>
+            <div class="mv-text">
+              <strong>Our Vision</strong>
+              <p>To see a generation of believers walking in God's purpose — disciplined, anointed, and world-changing.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mv-icon">◈</div>
+            <div class="mv-text">
+              <strong>Our Values</strong>
+              <p>Integrity • Excellence • Community • Discipleship • Faith in the power of the Gospel</p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="contact.html" class="btn btn-gold">Become Part of Our Family</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- History / More Info -->
+<section style="padding: 8rem 0; background: var(--bg2);">
+  <div class="container">
+    <div style="max-width: 760px; margin: 0 auto; text-align: center;">
+      <p class="section-label reveal">Our Journey</p>
+      <h2 class="section-title reveal delay-1">From Humble Beginnings to a Growing Family</h2>
+      <p class="reveal delay-2" style="font-size: 1.05rem; color: #555; line-height: 1.9; margin-top: 2rem;">
+        Founded in 2010, World of Discipline started as a small home fellowship with a burning desire to see lives transformed through the teaching of God’s Word and the power of the Holy Spirit. 
+        Today, we are a thriving church community with vibrant ministries, passionate worship, and a heart for outreach.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Mission, Vision & Values Cards -->
+<section class="mv-section">
+  <div class="container">
+    <div class="mv-section-head">
+      <p class="section-label reveal">What Drives Us</p>
+      <h2 class="section-title reveal delay-1">Our Mission, Vision <em>&amp; Values</em></h2>
+    </div>
+    <div class="mv-cards">
+      <div class="mv-card reveal">
+        <div class="mv-card-icon">✦</div>
+        <h3>Our Mission</h3>
+        <p>To make fully devoted followers of Christ who are disciplined in prayer, grounded in Scripture, and active in service to God and humanity.</p>
+      </div>
+      <div class="mv-card reveal delay-1">
+        <div class="mv-card-icon">◎</div>
+        <h3>Our Vision</h3>
+        <p>To see a generation of believers walking in God's purpose — disciplined, anointed, and world-changing — in every sphere of society.</p>
+      </div>
+      <div class="mv-card reveal delay-2">
+        <div class="mv-card-icon">◈</div>
+        <h3>Our Values</h3>
+        <p>Integrity, excellence, community, discipleship, and unwavering faith in the power of the Gospel to transform every life it touches.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scripture Quote Strip -->
+<div class="quote-strip">
+  <div class="container">
+    <blockquote class="reveal">"Train yourself for godliness; for while bodily training is of some value, godliness is of value in every way."</blockquote>
+    <cite class="reveal delay-1">1 Timothy 4:7–8</cite>
+  </div>
+</div>
+
+<!-- Core Values Strip -->
+<section class="values-strip">
+  <div class="container">
+    <div class="values-head">
+      <p class="section-label reveal">The Pillars We Stand On</p>
+      <h2 class="section-title reveal delay-1">Our Core <em>Values</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-item reveal">
+        <div class="value-num">01</div>
+        <div class="value-name">Integrity</div>
+        <p class="value-desc">We do what is right before God and man, in public and in private, without compromise.</p>
+      </div>
+      <div class="value-item reveal delay-1">
+        <div class="value-num">02</div>
+        <div class="value-name">Excellence</div>
+        <p class="value-desc">We give our best in everything — worship, service, work, and relationships — for God's glory.</p>
+      </div>
+      <div class="value-item reveal delay-2">
+        <div class="value-num">03</div>
+        <div class="value-name">Community</div>
+        <p class="value-desc">We are stronger together. We bear one another's burdens and celebrate each other's victories.</p>
+      </div>
+      <div class="value-item reveal delay-3">
+        <div class="value-num">04</div>
+        <div class="value-name">Discipleship</div>
+        <p class="value-desc">We are committed to spiritual growth — making disciples who make disciples, generation after generation.</p>
+      </div>
+      <div class="value-item reveal delay-4">
+        <div class="value-num">05</div>
+        <div class="value-name">Faith</div>
+        <p class="value-desc">We trust God completely, take Him at His Word, and step out boldly on His promises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="logo.jpg" alt="WOD Logo" />
+          <span class="footer-logo-text">World of Discipline</span>
+        </div>
+        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+          <a href="#" class="social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About WOD</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="ministries.html">Ministries</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ministries</h4>
+        <ul>
+          <li><a href="ministries.html">Prayer Ministry</a></li>
+          <li><a href="ministries.html">Worship & Arts</a></li>
+          <li><a href="ministries.html">WOD Youth</a></li>
+          <li><a href="ministries.html">Outreach</a></li>
+          <li><a href="ministries.html">Women of Virtue</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="contact.html">Plan Your Visit</a></li>
+          <li><a href="contact.html">New Believers</a></li>
+          <li><a href="contact.html">Baptism</a></li>
+          <li><a href="contact.html">Join a Cell</a></li>
+          <li><a href="contact.html">Give Online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 World of Discipline (WOD). All rights reserved.</p>
+      <p>Designed with faith & intentionality.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 60;
+  navbar.classList.toggle('scrolled', scrolled);
+  document.getElementById('btt').classList.toggle('show', window.scrollY > 500);
+}, { passive: true });
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+function openMobile() {
+  mobileMenu.classList.add('open');
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => hamburger.classList.contains('open') ? closeMobile() : openMobile());
+mobileClose.addEventListener('click', closeMobile);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobile(); });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
