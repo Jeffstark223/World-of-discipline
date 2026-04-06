@@ -209,13 +209,16 @@
     display: flex; align-items: center; overflow: hidden;
   }
   .hero-bg {
+    position: absolute; inset: 0; overflow: hidden;
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.25) 100%);
+    z-index: 1;
+  }
+  .hero-bg video {
     position: absolute; inset: 0;
-    background:
-      linear-gradient(160deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.4) 60%, rgba(0,0,0,.55) 100%),
-      /* ↓ CHANGE THIS URL to your event photo or church photo */
-      url('event.JPG') center/cover no-repeat;
-    transform: scale(1.04);
-    animation: heroZoom 22s ease-in-out infinite alternate;
+    width: 100%; height: 100%; object-fit: cover;
   }
   @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.0); } }
 
@@ -505,7 +508,11 @@
   HERO SECTION — Edit everything inside here for your event
   ============================================================ -->
 <section id="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline>
+      <source src="vid1.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="container hero-content" style="padding-top:4rem">
 
     <!-- BADGE: Small pill text above the title — change this to your event label -->
@@ -563,15 +570,12 @@
     <div class="about-grid">
       <div class="about-visual reveal-left">
         <div class="about-stat-card">
-          <strong>15+</strong>
+          <strong>6+</strong>
           <span>Years of Ministry</span>
         </div>
         <img class="about-img-main"
-          src="https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&w=900&q=80"
+          src="image1.jpg"
           alt="Church gathering in worship" />
-        <img class="about-img-accent"
-          src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80"
-          alt="Community fellowship" />
       </div>
       <div class="about-content reveal-right">
         <p class="section-label">Who We Are</p>
@@ -750,24 +754,19 @@
     </div>
     <div class="leadership-grid">
       <div class="leader-card reveal">
-        <img class="leader-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Senior Pastor" />
+        <img class="leader-img" src="Shine Bright.jpg" alt="Senior Pastor" />
         <div class="leader-name">Rev.Shine Bright</div>
-        <div class="leader-role">President of WOD</div>
+        <div class="leader-role">President</div>
       </div>
       <div class="leader-card reveal delay-1">
-        <img class="leader-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" alt="Co-Pastor" />
-        <div class="leader-name">General Godswill</div>
-        <div class="leader-role">Pastor of WOD</div>
+        <img class="leader-img" src="Godson.jpg" alt="Co-Pastor" />
+        <div class="leader-name">Pastor Godson</div>
+        <div class="leader-role">Vice President</div>
       </div>
       <div class="leader-card reveal delay-2">
-        <img class="leader-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Associate Pastor" />
-        <div class="leader-name">Pastor Godson</div>
-        <div class="leader-role">Co-pastor of WOD</div>
-      </div>
-      <div class="leader-card reveal delay-3">
-        <img class="leader-img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Youth Pastor" />
-        <div class="leader-name">Min. Elijah Nanor</div>
-        <div class="leader-role">Youth & Evangelism</div>
+        <img class="leader-img" src="Godswill.jpg" alt="Associate Pastor" />
+        <div class="leader-name">Pastor Godswill</div>
+        <div class="leader-role">Mission Director</div>
       </div>
     </div>
   </div>
@@ -823,53 +822,34 @@
         <p class="bank-col-title">GHS Account</p>
         <div class="bank-detail">
           <p class="bank-detail-label">Bank</p>
-          <p class="bank-detail-value">GCB Bank Ghana</p>
+          <p class="bank-detail-value">OmniBsic Bank</p>
         </div>
         <div class="bank-detail">
           <p class="bank-detail-label">Account Name</p>
-          <p class="bank-detail-value">World of Discipline Ministry</p>
+          <p class="bank-detail-value">Ebenezer Kisseih Appiah</p>
         </div>
         <div class="bank-detail">
           <p class="bank-detail-label">Account Number</p>
-          <p class="bank-detail-value">1234567890</p>
+          <p class="bank-detail-value">0010246960014</p>
         </div>
         <div class="bank-detail">
           <p class="bank-detail-label">Branch</p>
-          <p class="bank-detail-value">East Legon, Accra</p>
+          <p class="bank-detail-value">Odorkor Branch, Accra</p>
         </div>
       </div>
       <div>
         <p class="bank-col-title">Mobile Money</p>
         <div class="bank-detail">
           <p class="bank-detail-label">MTN MoMo</p>
-          <p class="bank-detail-value">+233 59 901 3748</p>
+          <p class="bank-detail-value">+233 59 965 5861 - Ebenezer Kisseih Appiah</p>
         </div>
         <div class="bank-detail">
-          <p class="bank-detail-label">Vodafone Cash</p>
-          <p class="bank-detail-value">+233 24 587 6651</p>
+          <p class="bank-detail-label">GhanaPay</p>
+          <p class="bank-detail-value">+233 59 965 5861 - Ebenezer Kisseih Appiah</p>
         </div>
         <div class="bank-detail">
           <p class="bank-detail-label">Reference</p>
           <p class="bank-detail-value">Your Name + Purpose<br><span style="font-size:.8rem;color:#888">e.g. John Mensah – Tithe</span></p>
-        </div>
-      </div>
-      <div>
-        <p class="bank-col-title">Foreign Currency</p>
-        <div class="bank-detail">
-          <p class="bank-detail-label">Bank</p>
-          <p class="bank-detail-value">Standard Chartered Ghana</p>
-        </div>
-        <div class="bank-detail">
-          <p class="bank-detail-label">Account Name</p>
-          <p class="bank-detail-value">World of Discipline Ministry</p>
-        </div>
-        <div class="bank-detail">
-          <p class="bank-detail-label">USD Account No.</p>
-          <p class="bank-detail-value">0987654321</p>
-        </div>
-        <div class="bank-detail">
-          <p class="bank-detail-label">SWIFT Code</p>
-          <p class="bank-detail-value">SCBLGHAC</p>
         </div>
       </div>
     </div>
