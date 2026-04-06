@@ -534,15 +534,8 @@
 
       <!-- Right Column - Contact Form -->
       <div class="reveal delay-2">
-        <form class="contact-form" name="wod-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-  
-          <input type="hidden" name="form-name" value="wod-contact" />
-          
-          <!-- Spam protection (invisible) -->
-          <p class="hidden" style="display:none;">
-            <label>Don’t fill this if you are human: <input name="bot-field" /></label>
-          </p>
-        
+        <form class="contact-form" action="https://formspree.io/f/mqegwqqq" method="POST">
+
           <div class="form-header">
             <h3>Send a Message</h3>
             <p>We'll respond within 24–48 hours.</p>
@@ -590,7 +583,7 @@
             Send Message
           </button>
         
-          <div class="form-message" id="formMessage" style="display:none; margin-top:1rem;">
+          <div class="form-message" id="formMessage" style="display:none; margin-top:1rem; padding:1rem; background:#eef6f6; border:1px solid #2d7d7d; border-radius:8px; color:#2d7d7d;">
             ✦ Thank you! Your message has been received. We will get back to you soon.
           </div>
         </form>
