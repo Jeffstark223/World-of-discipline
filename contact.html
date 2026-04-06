@@ -534,36 +534,44 @@
 
       <!-- Right Column - Contact Form -->
       <div class="reveal delay-2">
-        <form class="contact-form" id="contactForm" novalidate>
+        <form class="contact-form" name="wod-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  
+          <input type="hidden" name="form-name" value="wod-contact" />
+          
+          <!-- Spam protection (invisible) -->
+          <p class="hidden" style="display:none;">
+            <label>Don’t fill this if you are human: <input name="bot-field" /></label>
+          </p>
+        
           <div class="form-header">
             <h3>Send a Message</h3>
             <p>We'll respond within 24–48 hours.</p>
           </div>
-
+        
           <div class="form-row">
             <div class="form-field">
               <label for="firstName">First Name</label>
-              <input type="text" id="firstName" placeholder="John" required />
+              <input type="text" id="firstName" name="firstName" placeholder="John" required />
             </div>
             <div class="form-field">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" placeholder="Mensah" required />
+              <input type="text" id="lastName" name="lastName" placeholder="Mensah" required />
             </div>
           </div>
-
+        
           <div class="form-field">
             <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@email.com" required />
+            <input type="email" id="email" name="email" placeholder="you@email.com" required />
           </div>
-
+        
           <div class="form-field">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" placeholder="+233 XX XXX XXXX" />
+            <input type="tel" id="phone" name="phone" placeholder="+233 XX XXX XXXX" />
           </div>
-
+        
           <div class="form-field">
             <label for="subject">I am interested in</label>
-            <select id="subject">
+            <select id="subject" name="subject">
               <option value="">Choose a topic…</option>
               <option value="first-visit">First Visit / New Here</option>
               <option value="ministry">Joining a Ministry</option>
@@ -572,17 +580,17 @@
               <option value="general">General Enquiry</option>
             </select>
           </div>
-
+        
           <div class="form-field">
             <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell us how we can help you…" required></textarea>
+            <textarea id="message" name="message" placeholder="Tell us how we can help you…" required></textarea>
           </div>
-
+        
           <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:.3rem;">
             Send Message
           </button>
-
-          <div class="form-message" id="formMessage">
+        
+          <div class="form-message" id="formMessage" style="display:none; margin-top:1rem;">
             ✦ Thank you! Your message has been received. We will get back to you soon.
           </div>
         </form>
