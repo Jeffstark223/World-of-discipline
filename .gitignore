@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+# database + uploads + backups are DATA, not code
+data/
+backups/
+*.db
+*.db-wal
+*.db-shm
+*.db.before-restore-*
+.DS_Store
+*.log

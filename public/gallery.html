@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ministries — World of Discipline (WOD)</title>
+<title>Gallery — World of Discipline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
 <style>
-  /* ===== ALL CSS FROM YOUR ORIGINAL HOMEPAGE (navbar copied exactly) ===== */
+  /* ===== ALL CSS FROM YOUR ORIGINAL HOMEPAGE (unchanged) ===== */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -75,7 +75,7 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity .85s var(--ease-std), transform .85s var(--ease-std); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ══════════════════ NAVBAR — EXACT COPY FROM YOUR HOMEPAGE ══════════════════ */
+  /* ══════════════════ NAVBAR — EXACT COPY FROM HOMEPAGE ══════════════════ */
   #navbar {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -176,133 +176,140 @@
     .hamburger { display: flex; }
   }
 
-  /* Ministries Styles (unchanged) */
-  .min-grid {
+  /* Sermons Specific Styles (unchanged) */
+  .sermons-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 2rem;
   }
-  .min-card {
-    background: var(--panel); padding: 2.8rem 2.4rem; border-radius: 8px;
+  .sermon-card {
+    background: var(--panel); border-radius: 6px; overflow: hidden;
+    cursor: pointer; transition: transform .3s, box-shadow .3s;
     border: 1px solid var(--border-soft);
-    transition: all .4s;
   }
-  .min-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 60px rgba(0,0,0,.1);
+  .sermon-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
   }
-  .min-icon { font-size: 3.2rem; margin-bottom: 1.6rem; display: block; }
-  .min-name {
-    font-family: var(--ff-display); font-size: 1.45rem; font-weight: 500;
-    color: #111111; margin-bottom: .8rem;
+  .sermon-thumb {
+    position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--bg3);
   }
-  .min-desc { font-size: .95rem; color: #555555; line-height: 1.8; }
+  .sermon-thumb img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform .6s;
+  }
+  .sermon-card:hover .sermon-thumb img { transform: scale(1.08); }
 
-  /* ══════════════════ QUOTE STRIP ══════════════════ */
-  .quote-strip {
-    background: var(--teal);
-    padding: 5rem 0;
-    text-align: center;
+  .play-btn {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.2); transition: background .3s;
   }
-  .quote-strip blockquote {
-    font-family: var(--ff-display);
-    font-size: clamp(1.35rem, 3vw, 2rem);
-    font-weight: 400;
-    font-style: italic;
-    color: #ffffff;
-    max-width: 780px;
-    margin: 0 auto 1.2rem;
-    line-height: 1.5;
+  .play-btn-inner {
+    width: 56px; height: 56px; background: rgba(255,255,255,.95);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,.25);
   }
-  .quote-strip cite {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.65);
-    font-style: normal;
-    font-weight: 700;
+  .play-icon {
+    width:0; height:0; border-style:solid; border-width:9px 0 9px 16px;
+    border-color:transparent transparent transparent var(--teal); margin-left:3px;
   }
 
-  /* ══════════════════ GET INVOLVED ══════════════════ */
-  .get-involved {
-    background: var(--bg);
-    padding: 7rem 0;
+  .sermon-body { padding: 1.6rem; }
+  .sermon-meta {
+    display: flex; align-items: center; gap: .7rem; margin-bottom: .7rem;
+    font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted2); font-weight: 700;
   }
-  .gi-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+  .sermon-meta span.dot {
+    width: 3px; height: 3px; background: var(--muted2); border-radius: 50%;
   }
-  .gi-label {
-    font-size: .68rem; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--teal); font-weight: 700; margin-bottom: .9rem;
+  .sermon-title {
+    font-family: var(--ff-display); font-size: 1.25rem; font-weight: 500;
+    line-height: 1.35; margin-bottom: .5rem;
   }
-  .gi-title {
-    font-family: var(--ff-display);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400; line-height: 1.2; color: #111111;
-    margin-bottom: 1.4rem;
+  .sermon-speaker { font-size: .82rem; color: #555555; }
+  .sermon-tag {
+    display: inline-block; margin-top: 1rem; padding: .25rem .85rem;
+    background: #f0f0f0; border: 1px solid rgba(0,0,0,.1);
+    font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+    color: #333; border-radius: 30px; font-weight: 700;
   }
-  .gi-title em { font-style: italic; }
-  .gi-body {
-    color: #555555; font-size: .97rem; line-height: 1.85; margin-bottom: 2.2rem;
-  }
-  .gi-steps {
-    display: flex; flex-direction: column; gap: 1.4rem;
-  }
-  .gi-step {
-    display: flex; gap: 1.2rem; align-items: flex-start;
-  }
-  .gi-step-num {
-    flex-shrink: 0;
-    width: 40px; height: 40px;
-    background: var(--teal-pale);
-    border: 1px solid rgba(45,125,125,.2);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--ff-display); font-size: .95rem; color: var(--teal); font-weight: 700;
-  }
-  .gi-step-text strong {
-    display: block; color: #111111; font-size: .78rem;
-    letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
-    margin-bottom: .25rem;
-  }
-  .gi-step-text p { color: #555555; font-size: .9rem; line-height: 1.65; }
-  @media (max-width: 860px) { .gi-inner { grid-template-columns: 1fr; gap: 3rem; } }
 
-  /* ══════════════════ FOOTER ══════════════════ */
+  /* Footer (same as original) */
   footer { background: #f2f2f2; padding: 4rem 0 2rem; border-top: 1px solid rgba(0,0,0,.08); }
   .footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
   .footer-logo { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
-  .footer-logo img { height: 38px; width: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); object-fit: contain; }
+  .footer-logo img { height: 38px; width: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); }
   .footer-logo-text { font-family: var(--ff-display); font-size: 1.05rem; color: #111111; }
   .footer-tagline { color: #555555; font-size: .87rem; line-height: 1.7; max-width: 240px; }
   .footer-socials { display: flex; gap: .8rem; margin-top: 1.4rem; }
-  .social-link { width: 36px; height: 36px; border: 1px solid rgba(0,0,0,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #555555; transition: all .3s; }
+  .social-link {
+    width: 36px; height: 36px; border: 1px solid rgba(0,0,0,.12);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #555555; transition: all .3s;
+  }
   .social-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
-  .footer-col h4 { font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: #111111; margin-bottom: 1.2rem; font-weight: 700; }
+  .footer-col h4 {
+    font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+    color: #111111; margin-bottom: 1.2rem; font-weight: 700;
+  }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: .6rem; }
   .footer-col ul li a { color: #555555; font-size: .87rem; transition: color .3s; }
   .footer-col ul li a:hover { color: #111111; }
-  .footer-bottom { border-top: 1px solid rgba(0,0,0,.08); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom {
+    border-top: 1px solid rgba(0,0,0,.08); padding-top: 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
   .footer-bottom p { color: #888888; font-size: .76rem; }
-  @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } }
 
-  /* ══════════════════ BACK TO TOP ══════════════════ */
   #btt {
     position: fixed; bottom: 2rem; right: 2rem; width: 42px; height: 42px;
     background: var(--teal); color: #ffffff; border: none; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; opacity: 0; transform: translateY(10px);
-    transition: opacity .35s, transform .35s, background .3s;
-    z-index: 999; box-shadow: 0 4px 20px rgba(45,125,125,.3);
+    transition: all .35s; z-index: 999; box-shadow: 0 4px 20px rgba(45,125,125,.3);
   }
   #btt.show { opacity: 1; transform: translateY(0); }
-  #btt:hover { background: var(--teal-dark); }
-  #btt svg { width: 15px; height: 15px; }
+</style>
+
+<style>
+  .gallery-filters { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:2.2rem; }
+  .gallery-chip { font:700 .72rem var(--ff-body); letter-spacing:.1em; padding:.5rem 1.1rem; border-radius:30px; border:1px solid rgba(0,0,0,.14); background:#fff; color:#333; cursor:pointer; transition:all .25s var(--ease-std); }
+  .gallery-chip:hover { border-color:var(--teal); color:var(--teal); }
+  .gallery-chip.active { background:var(--teal); border-color:var(--teal); color:#fff; }
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.2rem; }
+  .gallery-item { margin:0; }
+  .gallery-item button { display:block; width:100%; padding:0; border:0; background:#e8eeee; border-radius:10px; overflow:hidden; cursor:zoom-in; aspect-ratio:4/3; }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease-std); }
+  .gallery-item button:hover img { transform:scale(1.05); }
+  .gallery-item button:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
+  .gallery-item figcaption { padding:.6rem .2rem 0; font-size:.85rem; color:var(--muted); }
+  .gallery-lightbox { position:fixed; inset:0; z-index:3000; background:rgba(10,20,20,.92); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; }
+  .gallery-lightbox img { max-width:min(1100px,92vw); max-height:78vh; border-radius:6px; }
+  .gallery-lightbox p { color:#fff; margin-top:1rem; text-align:center; max-width:70ch; }
+  .gallery-lightbox button { position:absolute; background:rgba(255,255,255,.12); color:#fff; border:0; border-radius:50%; width:46px; height:46px; font-size:1.6rem; cursor:pointer; line-height:1; }
+  .gallery-lightbox button:hover { background:rgba(255,255,255,.25); }
+  .lb-close { top:1.2rem; right:1.2rem; font-size:1.1rem !important; } .lb-prev { left:1.2rem; } .lb-next { right:1.2rem; }
+  @media (prefers-reduced-motion: reduce) { .gallery-item img { transition:none; } }
+</style>
+<style id="nav-shrink">
+  /* ══════════ Navbar shrinks to a compact pill on scroll (logo + button + menu icon) ══════════ */
+  .nav-logo { transition: gap .5s var(--ease-out); }
+  .nav-logo-text { max-width: 220px; overflow: hidden; white-space: nowrap; transition: opacity .3s ease, max-width .5s var(--ease-out); }
+  .nav-links { transition: opacity .3s ease, visibility .3s ease; }
+  .nav-logo img { transition: transform .4s var(--ease), width .5s var(--ease-out), height .5s var(--ease-out); }
+  .nav-pill { transition: background .5s var(--ease-out), border-color .5s var(--ease-out), box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .5s var(--ease-out); }
+  #navbar.scrolled { padding: .6rem 0; }
+  #navbar.scrolled .nav-pill { width: min(290px, 92vw); padding: .4rem .45rem .4rem .6rem; }
+  #navbar.scrolled .nav-logo { gap: 0; }
+  #navbar.scrolled .nav-logo img { width: 36px; height: 36px; }
+  #navbar.scrolled .nav-logo-text { opacity: 0; max-width: 0; }
+  #navbar.scrolled .nav-links { opacity: 0; visibility: hidden; pointer-events: none; }
+  #navbar.scrolled .nav-cta { gap: .5rem; }
+  #navbar.scrolled .nav-cta .btn { padding: .55rem 1.2rem; font-size: .78rem; }
+  #navbar.scrolled .hamburger { display: flex; }
+  @media (max-width: 860px) { #navbar.scrolled .nav-pill { width: min(140px, 92vw); } }
+  @media (prefers-reduced-motion: reduce) { .nav-pill, .nav-logo, .nav-logo-text, .nav-links, .nav-logo img { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -310,13 +317,13 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
   <span class="mobile-menu-close" id="mobileClose" aria-label="Close">✕</span>
-  <a href="index.html" onclick="closeMobile()">Home</a>
-  <a href="about.html"      onclick="closeMobile()">About</a>
-  <a href="sermons.html"    onclick="closeMobile()">Sermons</a>
-  <a href="events.html"     onclick="closeMobile()">Events</a>
-  <a href="ministries.html" onclick="closeMobile()">Ministries</a>
-  <a href="leadership.html" onclick="closeMobile()">Leadership</a>
-  <a href="contact.html"    onclick="closeMobile()">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="sermons.html">Sermons</a>
+  <a href="events.html">Events</a>
+  <a href="ministries.html">Ministries</a>
+  <a href="leadership.html">Leadership</a>
+  <a href="contact.html">Contact</a>
 </div>
 
 <!-- Navbar - Exact copy from your homepage -->
@@ -346,120 +353,25 @@
   </div>
 </nav>
 
-<!-- Ministries Header -->
-<section style="padding: 11rem 0 6rem; background: var(--bg); text-align: center;">
+<!-- Sermons Header -->
+<section style="padding: 11rem 0 5rem; background: var(--bg); text-align: center;">
   <div class="container">
-    <p class="section-label reveal">Serve • Grow • Impact</p>
-    <h1 class="section-title reveal delay-1">Our Ministries</h1>
-    <p class="reveal delay-2" style="max-width: 720px; margin: 1.8rem auto 0; font-size: 1.08rem; color: #555;">
-      Every believer has a gift and a place to serve. Discover where God is calling you to make an impact.
+    <p class="section-label reveal">Moments &amp; Memories</p>
+    <h1 class="section-title reveal delay-1">Photo Gallery</h1>
+    <p class="reveal delay-2" style="max-width: 680px; margin: 1.5rem auto 0; font-size: 1.05rem; color: #555;">
+      Glimpses of life at World of Discipline — worship, fellowship, outreach and more.
     </p>
   </div>
 </section>
 
-<!-- Ministries Grid -->
-<section style="padding: 5rem 0 10rem; background: var(--bg2);">
+<!-- Sermons Grid -->
+<section style="padding: 4rem 0 10rem; background: var(--bg2);">
   <div class="container">
-    <div class="min-grid">
-
-      <div class="min-card reveal">
-        <span class="min-icon">🙏</span>
-        <div class="min-name">Prayer Ministry</div>
-        <p class="min-desc">
-          The heartbeat of WOD. We intercede for our church, city, nation, and the nations through disciplined, fervent prayer.
-        </p>
-      </div>
-
-      <div class="min-card reveal delay-1">
-        <span class="min-icon">🎵</span>
-        <div class="min-name">Worship & Arts</div>
-        <p class="min-desc">
-          Leading the church into God’s presence through anointed music, dance, drama, and creative expressions of worship.
-        </p>
-      </div>
-
-      <div class="min-card reveal delay-2">
-        <span class="min-icon">⚡</span>
-        <div class="min-name">WOD Youth</div>
-        <p class="min-desc">
-          Raising a generation of young people who are on fire for God, grounded in Scripture, and walking in purpose and discipline.
-        </p>
-      </div>
-
-      <div class="min-card reveal delay-3">
-        <span class="min-icon">🌍</span>
-        <div class="min-name">Outreach & Missions</div>
-        <p class="min-desc">
-          Taking the love of Christ beyond the church walls — feeding the hungry, clothing the needy, and preaching the Gospel.
-        </p>
-      </div>
-
-      <div class="min-card reveal delay-2">
-        <span class="min-icon">👶</span>
-        <div class="min-name">Children's Ministry</div>
-        <p class="min-desc">
-          Building a strong foundation of faith in our children through fun, interactive Bible teaching and discipleship.
-        </p>
-      </div>
-
-      <div class="min-card reveal delay-3">
-        <span class="min-icon">🌿</span>
-        <div class="min-name">Women of Virtue</div>
-        <p class="min-desc">
-          Empowering women to walk in biblical womanhood, spiritual maturity, purpose, and sisterhood.
-        </p>
-      </div>
-
-    </div>
+    <div id="galleryFilters" class="gallery-filters" role="group" aria-label="Filter photos by category"></div>
+    <div class="gallery-grid" data-cms-list="gallery" data-empty="No photos have been added yet. Please check back soon."></div>
   </div>
 </section>
-
-<!-- Scripture Quote Strip -->
-<div class="quote-strip">
-  <div class="container">
-    <blockquote class="reveal">"Now there are varieties of gifts, but the same Spirit; and there are varieties of service, but the same Lord."</blockquote>
-    <cite class="reveal delay-1">1 Corinthians 12:4–5</cite>
-  </div>
-</div>
-
-<!-- Get Involved -->
-<section class="get-involved">
-  <div class="container">
-    <div class="gi-inner">
-      <div>
-        <p class="gi-label reveal">Your Place to Serve</p>
-        <h2 class="gi-title reveal delay-1">Find Your <em>Ministry</em></h2>
-        <p class="gi-body reveal delay-2">Every gift, every talent, every passion has a place at WOD. Whether you sing, pray, teach, serve, or give — there is a ministry waiting for you. Here's how to get connected.</p>
-        <a href="contact.html" class="btn btn-gold reveal delay-3">Connect With Us</a>
-      </div>
-      <div class="gi-steps">
-        <div class="gi-step reveal">
-          <div class="gi-step-num">1</div>
-          <div class="gi-step-text">
-            <strong>Visit a Sunday Service</strong>
-            <p>Come as you are. Every Sunday at 7:00 AM or 9:30 AM is a great time to experience WOD for the first time.</p>
-          </div>
-        </div>
-        <div class="gi-step reveal delay-1">
-          <div class="gi-step-num">2</div>
-          <div class="gi-step-text">
-            <strong>Speak to a Pastor</strong>
-            <p>After service, our pastors and ministry leads are available to answer questions and help you discern where you fit.</p>
-          </div>
-        </div>
-        <div class="gi-step reveal delay-2">
-          <div class="gi-step-num">3</div>
-          <div class="gi-step-text">
-            <strong>Join a Ministry Team</strong>
-            <p>Step in, serve faithfully, and watch God use your gifts to transform lives — starting with your own.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
+<!-- Footer (unchanged) -->
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -468,7 +380,7 @@
           <img src="logo.jpg" alt="WOD Logo" />
           <span class="footer-logo-text">World of Discipline</span>
         </div>
-        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <p class="footer-tagline" data-cms="footer_tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
         <div class="footer-socials">
           <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -523,6 +435,7 @@
 <script>
 // Exact navbar script from your homepage
 const navbar = document.getElementById('navbar');
+const navPill = document.getElementById('navPill');
 
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 60;
@@ -555,5 +468,6 @@ const observer = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => observer.observe(el));
 </script>
+<script src="cms.js" defer></script>
 </body>
 </html>

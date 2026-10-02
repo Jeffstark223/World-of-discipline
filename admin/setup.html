@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Set up — WOD Admin</title>
+<link rel="icon" href="/logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+<div class="login-wrap">
+  <section class="login-brand">
+    <a class="logo" href="/"><img src="/logo.jpg" alt="" /><span><b>World of Discipline</b><small>Website administration</small></span></a>
+    <div><blockquote>Let all things be done decently and in order.</blockquote><cite>1 Corinthians 14:40</cite></div>
+    <p class="fine">First-time setup. This page closes permanently once an administrator exists.</p>
+  </section>
+  <main class="login-main">
+    <div class="login-card">
+      <h1>Create the first administrator</h1>
+      <p class="sub">This will be your own login. You can add the other administrators from the dashboard afterwards.</p>
+      <div id="disabled" class="inline-error" hidden>Browser setup is switched off on this server. Set a <b>SETUP_TOKEN</b> environment variable (then redeploy), or run <b>npm run create-admin</b> in the Shell.</div>
+      <div id="error" class="inline-error" role="alert" hidden></div>
+      <form id="form" novalidate>
+        <div class="field" data-field="name"><label for="name">Full name</label><input class="input" id="name" autocomplete="name" maxlength="120" required autofocus /><span class="err" hidden></span></div>
+        <div class="field" data-field="email"><label for="email">Email</label><input class="input" id="email" type="email" autocomplete="username" required /><span class="err" hidden></span></div>
+        <div class="field" data-field="password"><label for="password">Password</label>
+          <div class="pw-wrap"><input class="input" id="password" type="password" autocomplete="new-password" required />
+            <button type="button" class="pw-toggle" id="toggle" aria-pressed="false">Show</button></div>
+          <span class="help">At least 10 characters, with letters and numbers.</span><span class="err" hidden></span></div>
+        <div class="field" data-field="confirm"><label for="confirm">Repeat password</label><input class="input" id="confirm" type="password" autocomplete="new-password" required /><span class="err" hidden></span></div>
+        <div class="field" data-field="token" id="tokenBox" hidden><label for="token">Setup code</label><input class="input" id="token" type="password" autocomplete="off" />
+          <span class="help">The SETUP_TOKEN value you set on the server.</span><span class="err" hidden></span></div>
+        <button class="btn btn-primary" id="submit" type="submit" style="width:100%;margin-top:.4rem">Create administrator</button>
+      </form>
+    </div>
+  </main>
+</div>
+<script src="setup.js"></script>
+</body>
+</html>

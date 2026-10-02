@@ -350,6 +350,25 @@
 
   #btt svg { width: 15px; height: 15px; }
 </style>
+<style id="nav-shrink">
+  /* ══════════ Navbar shrinks to a compact pill on scroll (logo + button + menu icon) ══════════ */
+  .nav-logo { transition: gap .5s var(--ease-out); }
+  .nav-logo-text { max-width: 220px; overflow: hidden; white-space: nowrap; transition: opacity .3s ease, max-width .5s var(--ease-out); }
+  .nav-links { transition: opacity .3s ease, visibility .3s ease; }
+  .nav-logo img { transition: transform .4s var(--ease), width .5s var(--ease-out), height .5s var(--ease-out); }
+  .nav-pill { transition: background .5s var(--ease-out), border-color .5s var(--ease-out), box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .5s var(--ease-out); }
+  #navbar.scrolled { padding: .6rem 0; }
+  #navbar.scrolled .nav-pill { width: min(290px, 92vw); padding: .4rem .45rem .4rem .6rem; }
+  #navbar.scrolled .nav-logo { gap: 0; }
+  #navbar.scrolled .nav-logo img { width: 36px; height: 36px; }
+  #navbar.scrolled .nav-logo-text { opacity: 0; max-width: 0; }
+  #navbar.scrolled .nav-links { opacity: 0; visibility: hidden; pointer-events: none; }
+  #navbar.scrolled .nav-cta { gap: .5rem; }
+  #navbar.scrolled .nav-cta .btn { padding: .55rem 1.2rem; font-size: .78rem; }
+  #navbar.scrolled .hamburger { display: flex; }
+  @media (max-width: 860px) { #navbar.scrolled .nav-pill { width: min(140px, 92vw); } }
+  @media (prefers-reduced-motion: reduce) { .nav-pill, .nav-logo, .nav-logo-text, .nav-links, .nav-logo img { transition: none !important; } }
+</style>
 </head>
 <body>
 
@@ -393,10 +412,10 @@
 </nav>
 
 <!-- About Hero -->
-<section class="about-hero" style="background-image: url('image2.jpg'); background-size: cover; background-position: center top; background-repeat: no-repeat;">  <div class="container">
+<section class="about-hero" data-cms-bg="about_hero_image" style="background-image: url('image2.jpg'); background-size: cover; background-position: center top; background-repeat: no-repeat;">  <div class="container">
     <p class="section-label reveal">Our Story</p>
     <h1 class="section-title reveal delay-1">About <em>World of Discipline</em></h1>
-    <p class="reveal delay-2" style="max-width: 720px; margin: 1.8rem auto 0; font-size: 1.08rem;">
+    <p class="reveal delay-2" style="max-width: 720px; margin: 1.8rem auto 0; font-size: 1.08rem;" data-cms="about_hero_description">
       A Spirit-filled church committed to raising disciplined, devoted followers of Jesus Christ who live out the Word daily.
     </p>
   </div>
@@ -410,10 +429,10 @@
       <!-- Visual Side -->
       <div class="about-visual reveal-left">
         <div class="about-stat-card">
-          <strong>6+</strong>
-          <span>Years of Ministry</span>
+          <strong data-cms="about_stat_number">6+</strong>
+          <span data-cms="about_stat_label">Years of Ministry</span>
         </div>
-        <img class="about-img-main" 
+        <img class="about-img-main" data-cms-src="about_image" 
              src="image1.jpg" 
              alt="Church gathering in worship" />
        
@@ -421,10 +440,10 @@
 
       <!-- Content Side -->
       <div class="about-content reveal-right">
-        <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Built on the <em>Word</em>,<br>moved by the Spirit</h2>
+        <p class="section-label" data-cms="about_label">Who We Are</p>
+        <h2 class="section-title" data-cms-rich="about_heading">Built on the <em>Word</em>,<br>moved by the Spirit</h2>
         
-        <p class="about-body" style="margin-top: 2rem;">
+        <p class="about-body" style="margin-top: 2rem;" data-cms="about_page_description">
           World of Discipline (WOD) is a vibrant, Spirit-filled church community in Accra, Ghana. 
           We are passionate about biblical truth, disciplined Christian living, and authentic worship. 
           Our desire is to see believers grow into mature disciples who impact their families, workplaces, 
@@ -436,21 +455,21 @@
             <div class="mv-icon">✦</div>
             <div class="mv-text">
               <strong>Our Mission</strong>
-              <p>Our mission is to guide the world toward maturity in Christ through unity and cooperation, fostering spiritual growth and conformity to His character.</p>
+              <p data-cms="mission_text">Our mission is to guide the world toward maturity in Christ through unity and cooperation, fostering spiritual growth and conformity to His character.</p>
             </div>
           </li>
           <li>
             <div class="mv-icon">◎</div>
             <div class="mv-text">
               <strong>Our Vision</strong>
-              <p>Our vision is for believers to reach full spiritual maturity, embodying the complete character and fullness of Christ.</p>
+              <p data-cms="vision_text">Our vision is for believers to reach full spiritual maturity, embodying the complete character and fullness of Christ.</p>
             </div>
           </li>
           <li>
             <div class="mv-icon">◈</div>
             <div class="mv-text">
               <strong>Our Values</strong>
-              <p>Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
+              <p data-cms="values_text">Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
             </div>
           </li>
         </ul>
@@ -467,8 +486,8 @@
   <div class="container">
     <div style="max-width: 760px; margin: 0 auto; text-align: center;">
       <p class="section-label reveal">Our Journey</p>
-      <h2 class="section-title reveal delay-1">From Humble Beginnings to a Growing Family</h2>
-      <p class="reveal delay-2" style="font-size: 1.05rem; color: #555; line-height: 1.9; margin-top: 2rem;">
+      <h2 class="section-title reveal delay-1" data-cms="journey_heading">From Humble Beginnings to a Growing Family</h2>
+      <p class="reveal delay-2" style="font-size: 1.05rem; color: #555; line-height: 1.9; margin-top: 2rem;" data-cms="journey_text">
         Founded in 2020, World of Discipline started as a small home fellowship with a burning desire to see lives transformed through the teaching of God’s Word and the power of the Holy Spirit. 
         Today, we are a thriving church community with vibrant ministries, passionate worship, and a heart for outreach.
       </p>
@@ -487,20 +506,20 @@
       <div class="mv-card reveal">
         <div class="mv-card-icon">✦</div>
         <h3>Our Mission</h3>
-        <p>Our mission focuses on maturing the world into a perfect man.
+        <p data-cms="mission_card_text">Our mission focuses on maturing the world into a perfect man.
           This maturation happens in synchronized movement, emphasizing unity and cooperation.
           The goal is for individuals to measure up to the full and complete standard of Christ, implying spiritual growth, maturity, and conformity to Christ’s character.</p>
       </div>
       <div class="mv-card reveal delay-1">
         <div class="mv-card-icon">◎</div>
         <h3>Our Vision</h3>
-        <p>Our vision is to see a perfect man measured up to the full and complete standard of Christ.
+        <p data-cms="vision_card_text">Our vision is to see a perfect man measured up to the full and complete standard of Christ.
           This suggests an end-goal of spiritual maturity where believers fully embody the qualities and fullness of Christ.</p>
       </div>
       <div class="mv-card reveal delay-2">
         <div class="mv-card-icon">◈</div>
         <h3>Our Values</h3>
-        <p>Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
+        <p data-cms="values_text">Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
       </div>
     </div>
   </div>
@@ -521,7 +540,7 @@
       <p class="section-label reveal">The Pillars We Stand On</p>
       <h2 class="section-title reveal delay-1">Our Core <em>Values</em></h2>
     </div>
-    <div class="values-grid">
+    <div class="values-grid" data-cms-list="corevalues">
       <div class="value-item reveal">
         <div class="value-num">01</div>
         <div class="value-name">Integrity</div>
@@ -560,7 +579,7 @@
           <img src="logo.jpg" alt="WOD Logo" />
           <span class="footer-logo-text">World of Discipline</span>
         </div>
-        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <p class="footer-tagline" data-cms="footer_tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
         <div class="footer-socials">
           <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -656,5 +675,6 @@ const observer = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => observer.observe(el));
 </script>
+<script src="cms.js" defer></script>
 </body>
 </html>

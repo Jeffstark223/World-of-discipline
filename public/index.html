@@ -462,6 +462,25 @@
   #btt:hover { background: var(--teal-dark); }
   #btt svg { width: 15px; height: 15px; }
 </style>
+<style id="nav-shrink">
+  /* ══════════ Navbar shrinks to a compact pill on scroll (logo + button + menu icon) ══════════ */
+  .nav-logo { transition: gap .5s var(--ease-out); }
+  .nav-logo-text { max-width: 220px; overflow: hidden; white-space: nowrap; transition: opacity .3s ease, max-width .5s var(--ease-out); }
+  .nav-links { transition: opacity .3s ease, visibility .3s ease; }
+  .nav-logo img { transition: transform .4s var(--ease), width .5s var(--ease-out), height .5s var(--ease-out); }
+  .nav-pill { transition: background .5s var(--ease-out), border-color .5s var(--ease-out), box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .5s var(--ease-out); }
+  #navbar.scrolled { padding: .6rem 0; }
+  #navbar.scrolled .nav-pill { width: min(290px, 92vw); padding: .4rem .45rem .4rem .6rem; }
+  #navbar.scrolled .nav-logo { gap: 0; }
+  #navbar.scrolled .nav-logo img { width: 36px; height: 36px; }
+  #navbar.scrolled .nav-logo-text { opacity: 0; max-width: 0; }
+  #navbar.scrolled .nav-links { opacity: 0; visibility: hidden; pointer-events: none; }
+  #navbar.scrolled .nav-cta { gap: .5rem; }
+  #navbar.scrolled .nav-cta .btn { padding: .55rem 1.2rem; font-size: .78rem; }
+  #navbar.scrolled .hamburger { display: flex; }
+  @media (max-width: 860px) { #navbar.scrolled .nav-pill { width: min(140px, 92vw); } }
+  @media (prefers-reduced-motion: reduce) { .nav-pill, .nav-logo, .nav-logo-text, .nav-links, .nav-logo img { transition: none !important; } }
+</style>
 </head>
 <body>
 
@@ -514,6 +533,7 @@
     </video>
   </div>
   <div class="container hero-content" style="padding-top:4rem">
+    <div data-cms-hero style="display:contents"></div>
 
     <!-- BADGE: Small pill text above the title — change this to your event label -->
     <!-- <div class="hero-badge">Good Word Conference 2025 · Now Live</div> -->
@@ -543,7 +563,7 @@
 <!-- Vision Pillars -->
 <div class="vision-strip">
   <div class="container">
-    <div class="vision-strip-inner">
+    <div class="vision-strip-inner" data-cms-list="pillars">
       <div class="vision-pillar">
         <div class="vision-pillar-icon">✦</div>
         <p><strong>Herald the Word</strong>We proclaim the fullness of Christ in every season and generation.</p>
@@ -570,17 +590,17 @@
     <div class="about-grid">
       <div class="about-visual reveal-left">
         <div class="about-stat-card">
-          <strong>6+</strong>
-          <span>Years of Ministry</span>
+          <strong data-cms="about_stat_number">6+</strong>
+          <span data-cms="about_stat_label">Years of Ministry</span>
         </div>
-        <img class="about-img-main"
+        <img class="about-img-main" data-cms-src="about_image"
           src="image1.jpg"
           alt="Church gathering in worship" />
       </div>
       <div class="about-content reveal-right">
-        <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Built on the <em>Word</em>,<br>moved by the Spirit</h2>
-        <p class="about-body" style="margin-top:1.2rem">
+        <p class="section-label" data-cms="about_label">Who We Are</p>
+        <h2 class="section-title" data-cms-rich="about_heading">Built on the <em>Word</em>,<br>moved by the Spirit</h2>
+        <p class="about-body" style="margin-top:1.2rem" data-cms="about_description">
           World of Discipline (WOD) is a Spirit-filled church community committed to raising believers who honour God through intentional living, disciplined devotion, and authentic worship. We believe the local church is God's primary instrument for transformation in every generation.
         </p>
         <ul class="mv-list">
@@ -588,21 +608,21 @@
             <div class="mv-icon">✦</div>
             <div class="mv-text">
               <strong>Our Mission</strong>
-              <p>Our mission is to guide the world toward maturity in Christ through unity and cooperation, fostering spiritual growth and conformity to His character.</p>
+              <p data-cms="mission_text">Our mission is to guide the world toward maturity in Christ through unity and cooperation, fostering spiritual growth and conformity to His character.</p>
             </div>
           </li>
           <li>
             <div class="mv-icon">◎</div>
             <div class="mv-text">
               <strong>Our Vision</strong>
-              <p>Our vision is for believers to reach full spiritual maturity, embodying the complete character and fullness of Christ.</p>
+              <p data-cms="vision_text">Our vision is for believers to reach full spiritual maturity, embodying the complete character and fullness of Christ.</p>
             </div>
           </li>
           <li>
             <div class="mv-icon">◈</div>
             <div class="mv-text">
               <strong>Our Values</strong>
-              <p>Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
+              <p data-cms="values_text">Our commission’s values are to hide the mystery of Christ, amplify His presence, sense His transforming power over politics and economies, witness His deliverance of creation from corruption into liberty, and acknowledge His redemptive work affecting all creatures.</p>
             </div>
           </li>
         </ul>
@@ -622,46 +642,9 @@
         <p class="section-label reveal">Recent Messages</p>
         <h2 class="section-title reveal delay-1">Words that <em>Build</em></h2>
       </div>
-      <a href="#sermons" class="btn btn-outline reveal delay-2">View All Sermons</a>
+      <a href="sermons.html" class="btn btn-outline reveal delay-2">View All Sermons</a>
     </div>
-    <div class="sermons-grid">
-      <div class="sermon-card reveal">
-        <div class="sermon-thumb">
-          <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=800&q=80" alt="Sermon" />
-          <div class="play-btn"><div class="play-btn-inner"><div class="play-icon"></div></div></div>
-        </div>
-        <div class="sermon-body">
-          <div class="sermon-meta"><span>Jun 15, 2025</span><span class="dot"></span><span>42 min</span></div>
-          <div class="sermon-title">The Discipline of Prayer</div>
-          <div class="sermon-speaker">Pastor Samuel Owusu</div>
-          <span class="sermon-tag">Prayer Series</span>
-        </div>
-      </div>
-      <div class="sermon-card reveal delay-1">
-        <div class="sermon-thumb">
-          <img src="https://images.unsplash.com/photo-1561370581-55aa45f9f023?auto=format&fit=crop&w=800&q=80" alt="Sermon" />
-          <div class="play-btn"><div class="play-btn-inner"><div class="play-icon"></div></div></div>
-        </div>
-        <div class="sermon-body">
-          <div class="sermon-meta"><span>Jun 8, 2025</span><span class="dot"></span><span>38 min</span></div>
-          <div class="sermon-title">Walking in Purpose</div>
-          <div class="sermon-speaker">Evang. Grace Mensah</div>
-          <span class="sermon-tag">Purpose</span>
-        </div>
-      </div>
-      <div class="sermon-card reveal delay-2">
-        <div class="sermon-thumb">
-          <img src="https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&w=800&q=80" alt="Sermon" />
-          <div class="play-btn"><div class="play-btn-inner"><div class="play-icon"></div></div></div>
-        </div>
-        <div class="sermon-body">
-          <div class="sermon-meta"><span>Jun 1, 2025</span><span class="dot"></span><span>51 min</span></div>
-          <div class="sermon-title">Faith Over Fear</div>
-          <div class="sermon-speaker">Pastor Samuel Owusu</div>
-          <span class="sermon-tag">Faith</span>
-        </div>
-      </div>
-    </div>
+    <div class="sermons-grid" data-cms-list="sermons" data-limit="3" data-featured-first="1" data-empty="No sermons have been published yet."></div>
   </div>
 </section>
 
@@ -680,44 +663,7 @@
       <p class="section-label reveal">What's Coming</p>
       <h2 class="section-title reveal delay-1">Upcoming <em>Events</em></h2>
     </div>
-    <div class="events-list">
-      <div class="event-item reveal">
-        <div class="event-date"><span class="day">27</span><span class="month">Apr</span></div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Lift A Learner Initiative</div>
-          <div class="event-detail">📍 April 27th 2026 - Volta Region</div>
-        </div>
-        <span class="event-type">Donation</span>
-      </div>
-      <div class="event-item reveal delay-1">
-        <div class="event-date"><span class="day">13</span><span class="month">Jul</span></div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Youth Prayer & Worship Night</div>
-          <div class="event-detail">📍 Main Sanctuary · 6:00 PM – 10:00 PM</div>
-        </div>
-        <span class="event-type">Youth</span>
-      </div>
-      <div class="event-item reveal delay-2">
-        <div class="event-date"><span class="day">20</span><span class="month">Jul</span></div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Baptism & New Members Sunday</div>
-          <div class="event-detail">📍 WOD Compound, East Legon · After 9:30 AM Service</div>
-        </div>
-        <span class="event-type">Sacrament</span>
-      </div>
-      <div class="event-item reveal delay-3">
-        <div class="event-date"><span class="day">02</span><span class="month">Aug</span></div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Outreach: Serve the City</div>
-          <div class="event-detail">📍 Various Locations, Accra · 7:00 AM – 2:00 PM</div>
-        </div>
-        <span class="event-type">Outreach</span>
-      </div>
-    </div>
+    <div class="events-list" data-cms-list="events" data-when="upcoming" data-limit="4" data-empty="No upcoming events have been posted yet. Please check back soon."></div>
   </div>
 </section>
 
@@ -731,14 +677,7 @@
       <h2 class="section-title reveal delay-1">Our <em>Ministries</em></h2>
       <p class="reveal delay-2" style="color:var(--muted);max-width:500px;margin:1rem auto 0;font-size:.95rem;">Every member has a place to serve. Discover where your gifts and calling intersect with our mission.</p>
     </div>
-    <div class="min-grid">
-      <div class="min-card reveal"><span class="min-icon">🙏</span><div class="min-name">Prayer Ministry</div><p class="min-desc">Interceding for our community, nation, and the nations — sustaining the church through fervent, disciplined prayer.</p></div>
-      <div class="min-card reveal delay-1"><span class="min-icon">🎵</span><div class="min-name">Worship & Arts</div><p class="min-desc">Offering excellence in music, dance, and creative expression as an act of devotion and a gateway to God's presence.</p></div>
-      <div class="min-card reveal delay-2"><span class="min-icon">⚡</span><div class="min-name">WOD Youth</div><p class="min-desc">Equipping the next generation with purpose, identity, and a disciplined walk with Christ in a complex world.</p></div>
-      <div class="min-card reveal delay-3"><span class="min-icon">🌍</span><div class="min-name">Outreach & Missions</div><p class="min-desc">Extending love beyond our walls — feeding, serving, and sharing the Gospel with the least and the lost.</p></div>
-      <div class="min-card reveal delay-2"><span class="min-icon">👶</span><div class="min-name">Children's Ministry</div><p class="min-desc">Sowing seeds of faith in young hearts through engaging Bible teaching, prayer, and God-centred fun.</p></div>
-      <div class="min-card reveal delay-3"><span class="min-icon">🌿</span><div class="min-name">Women of Virtue</div><p class="min-desc">Nurturing women in faith, identity, and purpose — building a sisterhood grounded in Scripture and grace.</p></div>
-    </div>
+    <div class="min-grid" data-cms-list="ministries" data-empty="Our ministries will be listed here soon."></div>
   </div>
 </section>
 
@@ -752,7 +691,7 @@
       <h2 class="section-title reveal delay-1">Our <em>Governors</em></h2>
       <p class="reveal delay-2" style="color:var(--muted);max-width:460px;margin:1rem auto 0;font-size:.95rem;">Shepherds called by God, committed to leading WOD with integrity, humility, and vision.</p>
     </div>
-    <div class="leadership-grid">
+    <div class="leadership-grid" data-cms-list="leaders">
       <div class="leader-card reveal">
         <img class="leader-img" src="Shine Bright.jpg" alt="Senior Pastor" />
         <div class="leader-name">Rev.Shine Bright</div>
@@ -776,12 +715,12 @@
 <section id="giving" aria-label="Giving">
   <div class="container">
     <div class="giving-head">
-      <p class="section-label reveal">Support the Vision</p>
-      <h2 class="section-title reveal delay-1">Give to <em>God's Work</em></h2>
-      <p class="giving-body-text reveal delay-2">Your generosity fuels the mission — from Sunday worship to outreach in the streets of Accra and beyond. Every seed sown here is an act of worship and faith.</p>
+      <p class="section-label reveal" data-cms="giving_label">Support the Vision</p>
+      <h2 class="section-title reveal delay-1" data-cms-rich="giving_heading">Give to <em>God's Work</em></h2>
+      <p class="giving-body-text reveal delay-2" data-cms="giving_intro">Your generosity fuels the mission — from Sunday worship to outreach in the streets of Accra and beyond. Every seed sown here is an act of worship and faith.</p>
     </div>
 
-    <div class="giving-grid">
+    <div class="giving-grid" data-cms-list="giving-cards">
       <div class="giving-card reveal">
         <div class="giving-card-icon">🙏</div>
         <div>
@@ -817,7 +756,7 @@
     </div>
 
     <!-- Bank Details -->
-    <div class="giving-bank reveal delay-1" id="giving-bank">
+    <div class="giving-bank reveal delay-1" id="giving-bank" data-cms-giving-bank>
       <div>
         <p class="bank-col-title">GHS Account</p>
         <div class="bank-detail">
@@ -854,7 +793,7 @@
       </div>
     </div>
 
-    <p class="giving-verse reveal">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."<cite>2 Corinthians 9:7</cite></p>
+    <p class="giving-verse reveal" data-cms-giving-verse>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."<cite>2 Corinthians 9:7</cite></p>
   </div>
 </section>
 
@@ -867,7 +806,7 @@
           <img src="logo.jpg" alt="WOD Logo" />
           <span class="footer-logo-text">World of Discipline</span>
         </div>
-        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <p class="footer-tagline" data-cms="footer_tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
         <div class="footer-socials">
           <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -950,5 +889,6 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(el => observer.observe(el));
 
 // Scroll reveal</script>
+<script src="cms.js" defer></script>
 </body>
 </html>

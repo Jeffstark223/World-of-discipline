@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Sign in — WOD Admin</title>
+<link rel="icon" href="/logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+<div class="login-wrap">
+  <section class="login-brand">
+    <a class="logo" href="/"><img src="/logo.jpg" alt="" /><span><b>World of Discipline</b><small>Website administration</small></span></a>
+    <div>
+      <blockquote>I discipline my body and keep it under control.</blockquote>
+      <cite>1 Corinthians 9:27</cite>
+    </div>
+    <p class="fine">Authorised WOD administrators only. Sign-ins are recorded.</p>
+  </section>
+  <main class="login-main">
+    <div class="login-card">
+      <h1>Welcome back</h1>
+      <p class="sub">Sign in with your own administrator account.</p>
+      <div id="error" class="inline-error" role="alert" hidden></div>
+      <form id="form" novalidate>
+        <div class="field"><label for="email">Email</label>
+          <input class="input" id="email" type="email" autocomplete="username" required autofocus /></div>
+        <div class="field"><label for="password">Password</label>
+          <div class="pw-wrap"><input class="input" id="password" type="password" autocomplete="current-password" required />
+            <button type="button" class="pw-toggle" id="toggle" aria-label="Show password" aria-pressed="false">Show</button></div></div>
+        <button class="btn btn-primary" id="submit" type="submit" style="width:100%;margin-top:.4rem">Sign in</button>
+      </form>
+      <p style="margin-top:1.4rem;font-size:.88rem"><a href="/">← Back to the website</a></p>
+    </div>
+  </main>
+</div>
+<script src="login.js"></script>
+</body>
+</html>

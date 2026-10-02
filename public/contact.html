@@ -424,6 +424,25 @@
     .footer-inner { grid-template-columns: 1fr; }
   }
 </style>
+<style id="nav-shrink">
+  /* ══════════ Navbar shrinks to a compact pill on scroll (logo + button + menu icon) ══════════ */
+  .nav-logo { transition: gap .5s var(--ease-out); }
+  .nav-logo-text { max-width: 220px; overflow: hidden; white-space: nowrap; transition: opacity .3s ease, max-width .5s var(--ease-out); }
+  .nav-links { transition: opacity .3s ease, visibility .3s ease; }
+  .nav-logo img { transition: transform .4s var(--ease), width .5s var(--ease-out), height .5s var(--ease-out); }
+  .nav-pill { transition: background .5s var(--ease-out), border-color .5s var(--ease-out), box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .5s var(--ease-out); }
+  #navbar.scrolled { padding: .6rem 0; }
+  #navbar.scrolled .nav-pill { width: min(290px, 92vw); padding: .4rem .45rem .4rem .6rem; }
+  #navbar.scrolled .nav-logo { gap: 0; }
+  #navbar.scrolled .nav-logo img { width: 36px; height: 36px; }
+  #navbar.scrolled .nav-logo-text { opacity: 0; max-width: 0; }
+  #navbar.scrolled .nav-links { opacity: 0; visibility: hidden; pointer-events: none; }
+  #navbar.scrolled .nav-cta { gap: .5rem; }
+  #navbar.scrolled .nav-cta .btn { padding: .55rem 1.2rem; font-size: .78rem; }
+  #navbar.scrolled .hamburger { display: flex; }
+  @media (max-width: 860px) { #navbar.scrolled .nav-pill { width: min(140px, 92vw); } }
+  @media (prefers-reduced-motion: reduce) { .nav-pill, .nav-logo, .nav-logo-text, .nav-links, .nav-logo img { transition: none !important; } }
+</style>
 </head>
 <body>
 
@@ -494,7 +513,7 @@
           <div class="ci-icon">📍</div>
           <div>
             <p class="ci-label">Physical Address</p>
-            <p class="ci-value">Taetop Junction (GPRC)<br>Weija, Accra, Ghana</p>
+            <p class="ci-value" data-cms-lines="address">Taetop Junction (GPRC)<br>Weija, Accra, Ghana</p>
           </div>
         </div>
 
@@ -502,9 +521,9 @@
           <div class="ci-icon">📞</div>
           <div>
             <p class="ci-label">Phone Numbers</p>
-            <p class="ci-value">
+            <p class="ci-value" data-cms-phones>
               <a href="tel:+233546075127">+233 54 607 5127</a><br>
-              <a href="tel:+233245876651">+233 50 942 5180</a>
+              <a href="tel:+233509425180">+233 50 942 5180</a>
             </p>
           </div>
         </div>
@@ -513,7 +532,7 @@
           <div class="ci-icon">✉️</div>
           <div>
             <p class="ci-label">Email Address</p>
-            <p class="ci-value"><a href="mailto:worldofdiscipline0@gmail.com">worldofdiscipline0@gmail.com</a></p>
+            <p class="ci-value" data-cms-email><a href="mailto:worldofdiscipline0@gmail.com">worldofdiscipline0@gmail.com</a></p>
           </div>
         </div>
 
@@ -521,7 +540,7 @@
           <div class="ci-icon">🕐</div>
           <div>
             <p class="ci-label">Service Times</p>
-            <p class="ci-value">
+            <p class="ci-value" data-cms-lines="service_times">
               Midweek: 9:00 PM 
               <br>
               Questions and Answers - 8:30PM
@@ -534,7 +553,8 @@
 
       <!-- Right Column - Contact Form -->
       <div class="reveal delay-2">
-        <form class="contact-form" action="https://formspree.io/f/mqegwqqq" method="POST">
+        <form class="contact-form" id="contactForm" action="#" method="POST">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
 
           <div class="form-header">
             <h3>Send a Message</h3>
@@ -609,7 +629,7 @@
       </iframe>
       <div class="map-card">
         <h4>World of Discipline</h4>
-        <p>Taetop Junction (GPRC)<br>Weija, Accra, Ghana</p>
+        <p data-cms-lines="address">Taetop Junction (GPRC)<br>Weija, Accra, Ghana</p>
         <a href="https://maps.google.com/?q=Weija+Accra+Ghana" target="_blank" rel="noopener">
           Get Directions
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -703,7 +723,7 @@
           <img src="logo.jpg" alt="WOD Logo" />
           <span class="footer-logo-text">World of Discipline</span>
         </div>
-        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <p class="footer-tagline" data-cms="footer_tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
         <div class="footer-socials">
           <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -799,23 +819,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 reveals.forEach(el => observer.observe(el));
 
-// Contact form submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = 'Message Sent ✓';
-    document.getElementById('formMessage').classList.add('show');
-    setTimeout(() => {
-      btn.textContent = 'Send Message';
-      btn.disabled = false;
-      document.getElementById('formMessage').classList.remove('show');
-      this.reset();
-    }, 5000);
-  }, 1800);
-});
+// Contact form: submission is handled by cms.js (saves to the CMS inbox)
 
 // FAQ accordion
 function toggleFaq(el) {
@@ -835,5 +839,6 @@ function toggleFaq(el) {
   }
 }
 </script>
+<script src="cms.js" defer></script>
 </body>
 </html>

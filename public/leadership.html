@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Events — World of Discipline (WOD)</title>
+<title>Leadership — World of Discipline (WOD)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
 <style>
-  /* ===== ALL CSS FROM YOUR ORIGINAL HOMEPAGE (unchanged except navbar) ===== */
+  /* ===== ALL CSS FROM YOUR ORIGINAL HOMEPAGE (navbar copied exactly) ===== */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -176,64 +176,208 @@
     .hamburger { display: flex; }
   }
 
-  /* Events Styles (unchanged) */
-  .event-item {
-    background: var(--panel); display: grid; grid-template-columns: auto 1px 1fr auto;
-    align-items: center; gap: 2rem; padding: 2rem 2.5rem;
-    border-radius: 4px; border: 1px solid var(--border-soft);
-    transition: transform .3s, box-shadow .3s, border-color .3s;
-    margin-bottom: 1rem;
+  /* Leadership Styles (unchanged) */
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
   }
-  .event-item:hover { transform: translateX(4px); box-shadow: 0 6px 30px rgba(0,0,0,.06); border-color: rgba(0,0,0,.1); }
-  .event-date { text-align: center; min-width: 56px; }
-  .event-date .day { font-family: var(--ff-display); font-size: 2.4rem; font-weight: 400; color: #111111; line-height: 1; display: block; }
-  .event-date .month { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: #888888; font-weight: 700; }
-  .event-divider { width: 1px; height: 56px; background: rgba(0,0,0,.08); }
-  .event-name { font-family: var(--ff-display); font-size: 1.25rem; font-weight: 500; color: #111111; margin-bottom: .3rem; }
-  .event-detail { font-size: .82rem; color: #555555; }
-  .event-type { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); background: var(--teal-pale); border: 1px solid rgba(45,125,125,.2); padding: .3rem .9rem; border-radius: 30px; white-space: nowrap; font-weight: 700; }
-
-  @media (max-width: 600px) {
-    .event-item { grid-template-columns: auto 1fr; gap: 1.2rem; padding: 1.5rem; }
-    .event-type, .event-divider { display: none; }
+  .leader-card {
+    background: var(--panel); border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border-soft);
+    transition: all .4s;
+  }
+  .leader-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,.12);
+  }
+  .leader-img {
+    width: 100%; aspect-ratio: 4/3.5; object-fit: cover;
+    object-position: top center;
+    transition: transform .5s;
+  }
+  .leader-card:hover .leader-img { transform: scale(1.05); }
+  .leader-info { padding: 1.8rem 1.6rem; }
+  .leader-name {
+    font-family: var(--ff-display); font-size: 1.35rem; font-weight: 500;
+    color: #111111; margin-bottom: .4rem;
+  }
+  .leader-role {
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--teal); font-weight: 700; margin-bottom: 1rem;
+  }
+  .leader-bio {
+    font-size: .92rem; color: #555555; line-height: 1.75;
   }
 
-  /* Footer */
+  /* ══════════════════ SCRIPTURE BANNER ══════════════════ */
+  .scripture-banner {
+    background: var(--teal);
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .scripture-banner::before {
+    content: '❝';
+    position: absolute;
+    top: -1.5rem; left: 50%;
+    transform: translateX(-50%);
+    font-size: 14rem;
+    color: rgba(255,255,255,.05);
+    font-family: var(--ff-display);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .scripture-banner blockquote {
+    font-family: var(--ff-display);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-style: italic;
+    font-weight: 400;
+    color: #ffffff;
+    max-width: 780px;
+    margin: 0 auto 1.2rem;
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+  .scripture-banner cite {
+    font-family: var(--ff-body);
+    font-size: .7rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    font-style: normal;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ══════════════════ CTA SECTION ══════════════════ */
+  .cta-section {
+    padding: 7rem 0;
+    background: var(--bg);
+    text-align: center;
+  }
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .cta-section .section-label { display: block; margin-bottom: .9rem; }
+  .cta-section .section-title { margin-bottom: 1.4rem; }
+  .cta-section .section-title em { font-style: italic; color: var(--teal); }
+  .cta-body {
+    color: #555555;
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 2.4rem;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-outline-teal {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .85rem 2.2rem;
+    border-radius: 50px;
+    font-family: var(--ff-body);
+    font-size: .82rem; font-weight: 700; letter-spacing: .08em;
+    cursor: pointer;
+    transition: all .3s var(--ease-std);
+    background: transparent;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+  }
+  .btn-outline-teal:hover { background: var(--teal); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,125,125,.2); }
+
+  /* ══════════════════ VALUES STRIP ══════════════════ */
+  .values-strip {
+    background: var(--bg2);
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .values-strip-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .value-card {
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 2.2rem 2rem;
+    transition: box-shadow .3s, transform .3s;
+  }
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.07); }
+  .value-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .value-title {
+    font-family: var(--ff-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: .6rem;
+  }
+  .value-desc { font-size: .88rem; color: #555555; line-height: 1.75; }
+  @media (max-width: 768px) { .values-grid { grid-template-columns: 1fr; } }
+
+  /* ══════════════════ FOOTER ══════════════════ */
   footer { background: #f2f2f2; padding: 4rem 0 2rem; border-top: 1px solid rgba(0,0,0,.08); }
   .footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
   .footer-logo { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
-  .footer-logo img { height: 38px; width: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); }
+  .footer-logo img { height: 38px; width: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); object-fit: contain; }
   .footer-logo-text { font-family: var(--ff-display); font-size: 1.05rem; color: #111111; }
   .footer-tagline { color: #555555; font-size: .87rem; line-height: 1.7; max-width: 240px; }
   .footer-socials { display: flex; gap: .8rem; margin-top: 1.4rem; }
-  .social-link {
-    width: 36px; height: 36px; border: 1px solid rgba(0,0,0,.12);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    color: #555555; transition: all .3s;
-  }
+  .social-link { width: 36px; height: 36px; border: 1px solid rgba(0,0,0,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #555555; transition: all .3s; }
   .social-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
-  .footer-col h4 {
-    font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
-    color: #111111; margin-bottom: 1.2rem; font-weight: 700;
-  }
+  .footer-col h4 { font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: #111111; margin-bottom: 1.2rem; font-weight: 700; }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: .6rem; }
   .footer-col ul li a { color: #555555; font-size: .87rem; transition: color .3s; }
   .footer-col ul li a:hover { color: #111111; }
-  .footer-bottom {
-    border-top: 1px solid rgba(0,0,0,.08); padding-top: 2rem;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-  }
+  .footer-bottom { border-top: 1px solid rgba(0,0,0,.08); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .footer-bottom p { color: #888888; font-size: .76rem; }
+  @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } }
 
+  /* ══════════════════ BACK TO TOP ══════════════════ */
   #btt {
     position: fixed; bottom: 2rem; right: 2rem; width: 42px; height: 42px;
     background: var(--teal); color: #ffffff; border: none; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; opacity: 0; transform: translateY(10px);
-    transition: all .35s; z-index: 999; box-shadow: 0 4px 20px rgba(45,125,125,.3);
+    transition: opacity .35s, transform .35s, background .3s;
+    z-index: 999; box-shadow: 0 4px 20px rgba(45,125,125,.3);
   }
   #btt.show { opacity: 1; transform: translateY(0); }
+  #btt:hover { background: var(--teal-dark); }
+  #btt svg { width: 15px; height: 15px; }
+</style>
+<style id="nav-shrink">
+  /* ══════════ Navbar shrinks to a compact pill on scroll (logo + button + menu icon) ══════════ */
+  .nav-logo { transition: gap .5s var(--ease-out); }
+  .nav-logo-text { max-width: 220px; overflow: hidden; white-space: nowrap; transition: opacity .3s ease, max-width .5s var(--ease-out); }
+  .nav-links { transition: opacity .3s ease, visibility .3s ease; }
+  .nav-logo img { transition: transform .4s var(--ease), width .5s var(--ease-out), height .5s var(--ease-out); }
+  .nav-pill { transition: background .5s var(--ease-out), border-color .5s var(--ease-out), box-shadow .5s var(--ease-out), width .5s var(--ease-out), padding .5s var(--ease-out); }
+  #navbar.scrolled { padding: .6rem 0; }
+  #navbar.scrolled .nav-pill { width: min(290px, 92vw); padding: .4rem .45rem .4rem .6rem; }
+  #navbar.scrolled .nav-logo { gap: 0; }
+  #navbar.scrolled .nav-logo img { width: 36px; height: 36px; }
+  #navbar.scrolled .nav-logo-text { opacity: 0; max-width: 0; }
+  #navbar.scrolled .nav-links { opacity: 0; visibility: hidden; pointer-events: none; }
+  #navbar.scrolled .nav-cta { gap: .5rem; }
+  #navbar.scrolled .nav-cta .btn { padding: .55rem 1.2rem; font-size: .78rem; }
+  #navbar.scrolled .hamburger { display: flex; }
+  @media (max-width: 860px) { #navbar.scrolled .nav-pill { width: min(140px, 92vw); } }
+  @media (prefers-reduced-motion: reduce) { .nav-pill, .nav-logo, .nav-logo-text, .nav-links, .nav-logo img { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -241,16 +385,16 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
   <span class="mobile-menu-close" id="mobileClose" aria-label="Close">✕</span>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="sermons.html">Sermons</a>
-  <a href="events.html">Events</a>
-  <a href="ministries.html">Ministries</a>
-  <a href="leadership.html">Leadership</a>
-  <a href="contact.html">Contact</a>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="about.html"      onclick="closeMobile()">About</a>
+  <a href="sermons.html"    onclick="closeMobile()">Sermons</a>
+  <a href="events.html"     onclick="closeMobile()">Events</a>
+  <a href="ministries.html" onclick="closeMobile()">Ministries</a>
+  <a href="leadership.html" onclick="closeMobile()">Leadership</a>
+  <a href="contact.html"    onclick="closeMobile()">Contact</a>
 </div>
 
-<!-- Navbar - Exact same as homepage -->
+<!-- Navbar - Exact copy from your homepage -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-pill" id="navPill">
     <a href="index.html" class="nav-logo" aria-label="World of Discipline Home">
@@ -277,112 +421,112 @@
   </div>
 </nav>
 
-<!-- Events Header -->
-<section style="padding: 11rem 0 5rem; background: var(--bg); text-align: center;">
+<!-- Leadership Header -->
+<section style="padding: 11rem 0 6rem; background: var(--bg); text-align: center;">
   <div class="container">
-    <p class="section-label reveal">Community & Faith</p>
-    <h1 class="section-title reveal delay-1">Upcoming Events</h1>
-    <p class="reveal delay-2" style="max-width: 680px; margin: 1.5rem auto 0; font-size: 1.05rem; color: #555;">
-      Join us for powerful gatherings, outreaches, and moments of fellowship.
+    <p class="section-label reveal">God’s Servants</p>
+    <h1 class="section-title reveal delay-1">Our Leadership</h1>
+    <p class="reveal delay-2" style="max-width: 680px; margin: 1.8rem auto 0; font-size: 1.05rem; color: #555;">
+      Shepherds called by God to lead World of Discipline with humility, integrity, and vision.
     </p>
+    <img 
+      src="leadership.jpg" data-cms-src="leadership_group_image" 
+      alt="WOD Leadership" 
+      class="reveal delay-3"
+      style="margin: 3rem auto 0; max-width: 860px; width: 100%; border-radius: 12px; display: block;"
+    />
   </div>
 </section>
 
-<!-- Upcoming Events -->
-<section style="padding: 4rem 0 8rem; background: var(--bg2);">
+<!-- Leadership Grid -->
+<section style="padding: 5rem 0 10rem; background: var(--bg2);">
   <div class="container">
-    <div class="events-list">
+    <div class="leadership-grid" data-cms-list="leaders" data-variant="full">
 
-      <div class="event-item reveal">
-        <div class="event-date">
-          <span class="day">27</span>
-          <span class="month">APR</span>
+      <div class="leader-card reveal">
+        <img class="leader-img" src="Shine Bright.jpg" alt="Rev. Shine Bright" />
+        <div class="leader-info">
+          <div class="leader-name">Rev. Shine Bright</div>
+          <div class="leader-role">President</div>
+          <p class="leader-bio">            
+An energetic Apostle of the Lord Jesus Christ with more than ten years of ministry experience. His message centers of fatherhood, sonship, immortality, discipleship, church structures, dispensations, grace etc. He currently holds a degree in chemical engineering, a Bachelor of Theology, and is presently pursuing Masters in Theology.
+          </p>
         </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Lift A Learner Initiative</div>
-          <div class="event-detail">📍 Volta Region • April 27th, 2026 • 9:00 AM</div>
-        </div>
-        <span class="event-type">Outreach</span>
       </div>
 
-      <div class="event-item reveal delay-1">
-        <div class="event-date">
-          <span class="day">13</span>
-          <span class="month">JUL</span>
+      <div class="leader-card reveal delay-1">
+        <img class="leader-img" src="Godson.jpg" alt="General Godswill" />
+        <div class="leader-info">
+          <div class="leader-name">Pastor Godson</div>
+          <div class="leader-role">Vice President</div>
+          <p class="leader-bio">
+            Pastor Godson serves as Vice President and is a senior presbyter within the commission, bringing nearly ten years of ministry experience. He comes from a Human Resources Management background and holds a certificate in Prophetic and Supernatural studies, along with a Bachelor of Theology and a Master of Theology. He is currently pursuing a Doctor of Philosophy in Theological Studies.
+          </p>
         </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Youth Prayer & Worship Night</div>
-          <div class="event-detail">📍 Main Sanctuary • 6:00 PM – 10:00 PM</div>
-        </div>
-        <span class="event-type">Youth</span>
       </div>
 
-      <div class="event-item reveal delay-2">
-        <div class="event-date">
-          <span class="day">20</span>
-          <span class="month">JUL</span>
+      <div class="leader-card reveal delay-2">
+        <img class="leader-img" src="Godswill.jpg" alt="Pastor Godson" />
+        <div class="leader-info">
+          <div class="leader-name">Pastor Godswill</div>
+          <div class="leader-role">Mission Director</div>
+          <p class="leader-bio">
+He is the National and Regional Missions Director of the commission. The convenor of Friday Sunsum teaching and prayer experience and the head of WOD Secretariat group and head of Donation and Outreach groups.
+          </p>
         </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Baptism & New Members Sunday</div>
-          <div class="event-detail">📍 WOD Compound, East Legon • After 9:30 AM Service</div>
-        </div>
-        <span class="event-type">Sacrament</span>
       </div>
-
-      <div class="event-item reveal delay-3">
-        <div class="event-date">
-          <span class="day">02</span>
-          <span class="month">AUG</span>
-        </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Outreach: Serve the City</div>
-          <div class="event-detail">📍 Various Locations, Accra • 7:00 AM – 2:00 PM</div>
-        </div>
-        <span class="event-type">Service</span>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- Past Events -->
-<section style="padding: 6rem 0; background: var(--bg);">
+<!-- Scripture Banner -->
+<div class="scripture-banner">
   <div class="container">
-    <p class="section-label reveal">Memories</p>
-    <h2 class="section-title reveal delay-1">Past Events</h2>
+    <blockquote class="reveal">"Obey your leaders and submit to them, for they are keeping watch over your souls, as those who will have to give an account."</blockquote>
+    <cite class="reveal delay-1">Hebrews 13:17</cite>
+  </div>
+</div>
 
-    <div class="events-list" style="margin-top: 2rem;">
-
-      <div class="event-item reveal">
-        <div class="event-date">
-          <span class="day">15</span>
-          <span class="month">MAR</span>
-        </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">Good Friday Service 2026</div>
-          <div class="event-detail">📍 Main Sanctuary • Special Evening Service</div>
-        </div>
-        <span class="event-type">Special</span>
+<!-- Leadership Values -->
+<section class="values-strip">
+  <div class="container">
+    <div class="values-strip-head">
+      <p class="section-label reveal">What Guides Us</p>
+      <h2 class="section-title reveal delay-1">Leadership <em>Principles</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">🙏</div>
+        <div class="value-title">Servant Leadership</div>
+        <p class="value-desc">We lead not to be served, but to serve. Every decision is made with the congregation's spiritual growth and wellbeing at heart.</p>
       </div>
-
-      <div class="event-item reveal delay-1">
-        <div class="event-date">
-          <span class="day">08</span>
-          <span class="month">MAR</span>
-        </div>
-        <div class="event-divider"></div>
-        <div class="event-info">
-          <div class="event-name">International Women's Day Celebration</div>
-          <div class="event-detail">📍 WOD Hall • Women of Virtue Ministry</div>
-        </div>
-        <span class="event-type">Women</span>
+      <div class="value-card reveal delay-1">
+        <div class="value-icon">📖</div>
+        <div class="value-title">Word-Centred</div>
+        <p class="value-desc">Scripture is our foundation and final authority. Our leadership is anchored in the truth and wisdom of God's Word.</p>
       </div>
+      <div class="value-card reveal delay-2">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Accountable & Transparent</div>
+        <p class="value-desc">We hold ourselves to the highest standard of integrity — accountable to God, to each other, and to the people we shepherd.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="section-label reveal">Get Connected</p>
+      <h2 class="section-title reveal delay-1">Want to <em>Speak</em> with a Pastor?</h2>
+      <p class="cta-body reveal delay-2">Whether you need prayer, counsel, or simply want to connect with our leadership team, we are here for you. Reach out and we'll get you in touch with the right person.</p>
+      <div class="cta-actions reveal delay-3">
+        <a href="contact.html" class="btn btn-gold">Contact Us</a>
+        <a href="contact.html" class="btn-outline-teal">Request Prayer</a>
+      </div>
     </div>
   </div>
 </section>
@@ -396,7 +540,7 @@
           <img src="logo.jpg" alt="WOD Logo" />
           <span class="footer-logo-text">World of Discipline</span>
         </div>
-        <p class="footer-tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
+        <p class="footer-tagline" data-cms="footer_tagline">A community rooted in faith, shaped by Scripture, and moved by the power of God's Word.</p>
         <div class="footer-socials">
           <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -483,5 +627,6 @@ const observer = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => observer.observe(el));
 </script>
+<script src="cms.js" defer></script>
 </body>
 </html>
